@@ -1,0 +1,34 @@
+#Phone.py
+# Owner.py
+from Phone import Phone
+# from Owner import Owner
+def valid_phone_number(phone):
+    if len(phone) ==8 and phone.isnumeric():
+        return True
+    else:
+        print("Invalid Phone Number")
+        return False
+
+def valid_email(email):
+    if '@' in email and '.com' in email:
+        return True
+    else:
+        return False
+# Part A
+phones = []
+while Phone.count!=2:
+    while True:
+        phone = input("Enter Phone number: ")
+        numberCheck = valid_phone_number(phone)
+        if numberCheck == True:
+            break
+        else:
+            continue
+
+    name = input("Enter Owner Name: ")
+    p = Phone(phone,name)
+    phones.append(p)
+
+for i in phones:
+    print(i)
+
