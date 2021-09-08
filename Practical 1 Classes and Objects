@@ -1,0 +1,22 @@
+# Practical 1 Qn 1
+class Pet:
+    def __init__(self,name,animal,age):
+        self.__name = name
+        self.__animal = animal
+        self.__age = age
+    def get_name(self):
+        return self.__name
+    def get_animal(self):
+        return self.__animal
+    def get_age(self):
+        return self.__age
+    def __str__(self):
+        s = f'Pet {self.__name} is a {self.__animal}, and it is {self.__age} years old'
+        return s
+
+petName = input("Enter pet name: ")
+petType = input("Enter Pet Type: ")
+petAge = int(input("Enter age of pet: "))
+
+p = Pet(petName,petType,petAge)
+print(p)
