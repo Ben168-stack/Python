@@ -1,0 +1,53 @@
+# part a
+class Customer:
+    def __init__(self, customer_id, name):
+        self.__customer_id = customer_id
+        self.__name = name
+
+    def get_name(self):
+        return self.__name
+
+    def get_customer_id(self):
+        return self.__customer_id
+
+    def __str__(self):
+        return f'===== Customer Details =====\nCustomer ID: {self.__customer_id}' \
+               f'\nCustomer Name: {self.__name}'
+
+
+# part b
+def is_valid_id(s):
+    if len(s) != 5:
+        return False
+    if s[-1].isalpha():
+        for num in s[0:3]:
+            if num.isnumeric():
+                return True
+            else:
+                return False
+    else:
+        return False
+customers = []
+while True:
+    while True:
+        id = input('Enter Customer ID: ').upper()
+        idCheck = is_valid_id(id)
+        if idCheck == True:
+            break
+        else:
+            print("Invalid Id(id should consist of 4 digits and ends with an alphabet)")
+            continue
+    name = input("Enter Customer's name: ").title()
+    c = Customer(id, name)
+    customers.append(c)
+    prompt = ''
+    while prompt not in ['Y', "N"]:
+        prompt = input("Would you like to record another entry?(Y or N): ").upper()
+        if prompt == "Y":
+            break
+        elif prompt == "N":
+            for i in customers:
+                print(i)
+            exit()
+        else:
+            continue
