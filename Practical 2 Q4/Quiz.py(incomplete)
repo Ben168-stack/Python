@@ -43,3 +43,16 @@ class Question:
         self.answer = answer
     def get_answer(self):
         return self.answer
+
+
+while True:
+    choice = input("Create Questions(C), Start Quiz(S), Exit(E)\nEnter Choice: ").upper()
+    if choice == "C":
+        Quiz()
+    elif choice == "S":
+        Quiz.start_quiz()
+    elif choice == "E":
+        print("Goodbye.")
+        exit()
+    else:
+        print("Invalid Choice")
