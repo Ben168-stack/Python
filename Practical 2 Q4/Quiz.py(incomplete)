@@ -32,7 +32,7 @@ class Quiz:
                 break
 
             elif len(self.questions) > 2:
-                random_num = random.randint(0, len(self.questions))
+                random_num = random.randint(0, (len(self.questions)-1))
                 print((self.questions[random_num]).get_question())
                 choice = input("Enter answer: ")
                 if choice == (self.questions[random_num]).get_answer():
@@ -40,11 +40,14 @@ class Quiz:
                     count+=1
                     print(f"The answer is {(self.questions[random_num]).get_answer()}")
                     print("You got it right yay!")
+                    print(f"You got {score} out of 3 so far!")
                 else:
                     count += 1
                     print(f"The answer is {(self.questions[random_num]).get_answer()}")
                     print("Better Luck Next Time!")
+                    print(f"You got {score} out of 3 so far!")
         if len(self.questions)>=3:
+            print("The Quiz has Ended.")
             print(f"You got {score} out of 3 right!")
 
 
