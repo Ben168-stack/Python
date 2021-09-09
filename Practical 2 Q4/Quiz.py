@@ -26,6 +26,7 @@ class Quiz:
     def quiz(self):
         score = 0
         count = 0
+        occuredNumbers = []
         while count!=3:
             if len(self.questions) < 3:
                 print("Please Create at least 3 questions before starting the Quiz.")
@@ -33,9 +34,13 @@ class Quiz:
 
             elif len(self.questions) > 2:
                 random_num = random.randint(0, (len(self.questions)-1))
-                print((self.questions[random_num]).get_question())
+                if random_num not in occuredNumbers:
+                    print((self.questions[random_num]).get_question())
+                elif random_num in occuredNumbers:
+                    continue
                 choice = input("Enter answer: ")
-                if choice == (self.questions[random_num]).get_answer():
+                if choice == (self.questions[random_num]).get_answer() and random_num not in occuredNumbers:
+                    occuredNumbers.append(random_num)
                     score+=1
                     count+=1
                     print(f"The answer is {(self.questions[random_num]).get_answer()}")
