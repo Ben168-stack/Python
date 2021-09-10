@@ -1,0 +1,31 @@
+# from Monster import Monster
+from MonsterSubClass import FireMonster
+from MonsterSubClass import WaterMonster
+from MonsterSubClass import GrassMonster
+import random
+class MonsterGame:
+    def __init__(self):
+        self.choose_monster()
+        self.generate_monster()
+    def choose_monster(self):
+        monster = ''
+        while monster not in ['Fire',"Water","Grass"]:
+            monster = input("Choose Your Monster Type(Fire, Water or Grass): ").title()
+            if monster == 'Fire':
+                self.player_monster = FireMonster()
+                print(self.player_monster._Monster__name)
+            elif monster == 'Water':
+                self.player_monster = WaterMonster()
+            elif monster == 'Grass':
+                self.player_monster = GrassMonster()
+            else:
+                print("Invalid Monster Type!")
+    def generate_monster(self):
+        monsters = [FireMonster(),WaterMonster(),GrassMonster()]
+        random_num = random.randint(0, (len(monsters)-1))
+        self.computer_monster = monsters[random_num]
+
+
+
+MonsterGame()
+print(GrassMonster().__dict__)
