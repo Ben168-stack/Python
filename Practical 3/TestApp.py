@@ -26,6 +26,9 @@ while True:
         print("Invalid NRIC!")
 while True:
     Lecturer_ID = input("Enter Staff ID: ").upper()
+    if Lecturer_ID!=Lecturer_NRIC:
+        print("ID is not same as NRIC!")
+        continue
     id_check = is_valid_nric(Lecturer_ID)
     if id_check == True:
         break
