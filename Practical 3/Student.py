@@ -6,16 +6,31 @@ class Student(Person):
         self.__admin_no = admin_no
         self.__test_mark = ''
         self.__exam_mark = ''
-        while type(self.__test_mark) != int:
+        while True:
             try:
                 self.__test_mark = int(input("Enter Test mark: "))
             except ValueError:
                 print("Invalid Input Type!")
-        while type(self.__exam_mark) != int:
+            if type(self.__test_mark)==int:
+                break
+            if self.__test_mark<0:
+                print("Test Mark can't be less than 0!")
+                continue
+            elif self.__test_mark>100:
+                print("Test Mark can't be less than 100!")
+        while True:
             try:
                 self.__exam_mark = int(input("Enter Exam mark: "))
             except ValueError:
                 print("Invalid Input Type!")
+            if type(self.__exam_mark)==int:
+                break
+            if self.__exam_mark<0:
+                print("Exam Mark can't be less than 0!")
+                continue
+            elif self.__exam_mark>100:
+                print("Exam Mark can't be more than 100!")
+                continue
 
     def computeFinalMark(self):
         return (self.__exam_mark+self.__test_mark)/2
