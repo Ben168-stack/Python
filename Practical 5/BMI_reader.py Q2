@@ -1,0 +1,41 @@
+while True:
+    name = input('Enter name: ')
+    while True:
+        try:
+            weight = float(input('Enter weight(kg):'))
+            if weight <= 0:
+                print("Weight can't be 0 or less!")
+            if type(weight) == float and weight > 0:
+                break
+        except ValueError:
+            print("Please Enter a valid number!")
+    while True:
+        try:
+            height = float(input('Enter height(m):'))
+            if height <= 0:
+                print("Height can't be 0 or less!")
+            if type(height) == float and height > 0:
+                break
+        except ValueError:
+            print("Please Enter a valid number!")
+
+    bmi = weight / height ** 2
+    print(bmi)
+    command = input('Store your bmi to file? (Y/N):').upper()
+    if command.upper() == 'Y':
+        bmi_File = open('bmi.txt', 'a')
+        bmi_File.write(name + ' ,' + str(bmi) + '\n')
+        bmi_File.close()
+        command = input('Do you want to continue? (Y/N):').upper()
+        if command.upper() == 'N':
+            break
+command = input('Do you want view BMI record in file? (Y/N):').upper()
+if command.upper() == 'Y':
+    try:
+        bmi_File = open('bmi.txt', 'r')
+        contents = bmi_File.read()
+        print(contents)
+        bmi_File.close()
+        print('End of program')
+    except IOError:
+        print("An Error has occurred trying to read")
