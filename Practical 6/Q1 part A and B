@@ -1,0 +1,37 @@
+import shelve
+class Student:
+    def __init__(self, name,math,chinese,english,science):
+        self.name = name
+        self.math = math
+        self.chinese = chinese
+        self.english = english
+        self.science = science
+        self.choices = ['SchoolA', 'SchoolB', 'SchoolC']
+
+    def get_score(self):
+        return (self.math + self.chinese + self.english + self.science)/4
+
+
+def main():
+    students = load_result()
+    for s in students:
+        print(f"{s.name} scores {s.get_score()}, his/her choices are {s.choices[0]}, {s.choices[1]}, {s.choices[2]}")
+
+
+def load_result():
+    students = []
+    try:
+        read_studFile = open("results.txt","r")
+        for i in read_studFile:
+            s = i.strip("\n").split(',')
+            students.append(Student(s[0],int(s[1]),int(s[2]),int(s[3]),int(s[4])))
+    except IOError:
+        print("File not found")
+
+    return students
+
+main()
+
+
+
+
