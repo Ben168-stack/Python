@@ -1,0 +1,25 @@
+count = ''
+num = ''
+while True:
+    try:
+        count = int(input("How many number you want to capture? "))
+    except ValueError:
+        print('Please enter a number!')
+    if type(count) == int:
+        break
+numList = []
+for i in range(count):
+    msg = f'Enter number # {i + 1} '
+    while True:
+        try:
+            num = int(input(msg))
+        except ValueError:
+            print("Please enter a number!")
+        if type(num) == int:
+            break
+    numList.append(num)
+
+print(f"The lowest number in the list {min(numList)}")
+print(f"The highest number in the list {max(numList)}")
+print(f"The total of the numbers in the list {sum(numList)}")
+print(f"The average of the number in the list {sum(numList) / len(numList)}")
