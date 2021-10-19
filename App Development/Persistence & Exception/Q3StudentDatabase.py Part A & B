@@ -1,0 +1,50 @@
+class Student:
+    def __init__(self, name):
+        self.name = name
+        self.math = 0
+        self.chinese = 0
+        self.english = 0
+        self.science = 0
+        self.choices = ['SchoolA',"SchoolB","SchoolC"]
+
+    def get_score(self):
+        return (self.math + self.chinese + self.english + self.science) / 4
+
+    def set_math(self, math):
+        self.math = math
+
+    def set_chinese(self, chinese):
+        self.chinese = chinese
+
+    def set_english(self, english):
+        self.english = english
+
+    def set_science(self, science):
+        self.science = science
+
+
+def main():
+    students = load_results()
+    for s in students:
+        print(f"{s.name} scores {s.get_score()}, his/her choices are {s.choices[0]}, {s.choices[1]}, {s.choices[2]} ")
+
+
+def load_results():
+    students = []
+    # implement result logic here
+    try:
+        read_studDB = open('results.txt', 'r')
+        for i in read_studDB:
+            s = i.strip("\n").split(',')
+            stud = Student(s[0])
+            stud.set_math(int(s[1]))
+            stud.set_science(int(s[2]))
+            stud.set_english(int(s[3]))
+            stud.set_chinese(int(s[4]))
+            students.append(stud)
+    except IOError:
+        print("File not found")
+    return students
+
+
+main()
