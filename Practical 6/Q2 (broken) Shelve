@@ -1,0 +1,183 @@
+import shelve
+
+db = shelve.open('storage.db', 'c')
+
+
+class Employee:
+    def __init__(self, name, id, department, title):
+        self.__name = name
+        self.__id = id
+        self.__department = department
+        self.__title = title
+
+    def __str__(self):
+        return f'Name: {self.__name}, ID: {self.__id}, Department: {self.__department}, ' \
+               f'Title: {self.__title}'
+
+    def __repr__(self):
+        return f"Name: {self.__name}, Id: {self.__id}, Department: {self.__department}, Title: {self.__title}"
+
+    def edit_name(self, name):
+        self.__name = name
+
+    def edit_id(self, id):
+        self.__id = id
+
+    def edit_department(self, department):
+        self.__department = department
+
+    def edit_title(self, title):
+        self.__title = title
+
+    def get_name(self):
+        return self.__name
+
+    def get_id(self):
+        return self.__id
+
+    def get_department(self):
+        return self.__department
+
+    def get_title(self):
+        return self.__title
+
+
+employees = {
+
+}
+
+def add_employee(id, employee):
+    employees[id] = employee
+
+
+command1 = ''
+while True:
+    while True:
+        print("Select the program 1-6 to run:")
+        print("1. Search for an employee")
+        print("2. Add new employee")
+        print("3. Update employee details")
+        print("4. Delete an employee")
+        print("5. Display all employees")
+        print("6. Quit the program")
+        choice = input("Enter your command (1-6): ")
+        if choice == '1':
+            while True:
+                print("Employee Database:")
+                for key in employees:
+                    print(f"Employee ID: {key}")
+                command = input("Find Employee(enter id)\nExit(E)\nEnter Choice: ").upper()
+                if command in ["E", 'EXIT']:
+                    break
+                elif command not in employees:
+                    print("Employee ID does not exist!")
+                    continue
+                elif command in employees:
+                    while command1 not in ['E', "EXIT"]:
+                        print(employees[command])
+                        print("Exit(E)")
+                        command1 = input("Enter Choice: ").upper()
+
+
+        elif choice == '2':
+            while True:
+                name = input("Enter Employee's name: ").title()
+                while True:
+                    id = input("Enter Employee's ID: ").upper()
+                    if id in ["EXIT", 'E']:
+                        print("Illegal keywords")
+                    else:
+                        break
+                department = input("Enter Employee's Department: ").title()
+                title = input("Enter Employee's title: ").title()
+                e = Employee(name, id, department, title)
+                add_employee(id, e)
+                db['Info'] = employees
+                print("Employee Added Successfully!")
+                break
+        elif choice == '3':
+            while True:
+                print("Employee Database:")
+                for key in employees:
+                    print(f"Employee ID: {key}")
+                command = input("Enter Employee's ID to update, Exit(E)\nEnter Choice: ").upper()
+                if command in ['EXIT', 'E']:
+                    break
+                elif command in employees:
+                    while command1 not in ['E', "EXIT"]:
+                        print(employees[command])
+                        print("Exit(E)")
+                        command1 = input("Enter attribute to change(Name,ID,Department,Title): ").upper()
+                        if command1 == 'NAME':
+                            name = input("Please enter new name: ").title()
+                            employees[command].edit_name(name)
+                            db['Info'] = employees
+                            print("Name Changed Successfully!")
+                        elif command1 == 'ID':
+                            while True:
+                                id = input("Enter Employee's ID: ").upper()
+                                if id in ["EXIT", 'E']:
+                                    print("Illegal keywords")
+                                else:
+                                    break
+                            employees[command].edit_id(id)
+                            db['Info'] = employees
+                            print("ID Changed Successfully!")
+                        elif command1 == "DEPARTMENT":
+                            department = input("Please enter new Department: ").title()
+                            employees[command].edit_department(department)
+                            db['Info'] = employees
+                            print("Department Changed Successfully!")
+                        elif command1 == 'TITLE':
+                            title = input("Please enter new title: ").title()
+                            employees[command].edit_title(title)
+                            db['Info'] = employees
+                            print("Title Changed Successfully!")
+                        elif command1 in ["EXIT", "E"]:
+                            break
+                        else:
+                            print("Invalid Command!")
+
+
+                elif command not in employees:
+                    print('Employee ID does not exist')
+                else:
+                    print("Invalid Command!")
+
+        elif choice == '4':
+            while True:
+                print("Employee Database:")
+                for key in employees:
+                    print(f"Employee ID: {key}")
+                command = input("Enter Employee's ID to delete, Exit(E)\nEnter Choice: ").upper()
+                if command in ['EXIT', "E"]:
+                    break
+                elif command in employees:
+                    del (employees[command])
+                    db['Info'] = employees
+                    print("Employee Deleted Successfully")
+                elif command not in employees:
+                    print('Employee ID does not exist')
+                else:
+                    print("Invalid Command!")
+
+
+        elif choice == '5':
+            try:
+                employees = db['Info']
+                if len(employees) != 0:
+                    for key in employees:
+                        print(
+                            f"Employee ID: {key} Name: {employees[key].get_name()} Department: {employees[key].get_id()} Title: {employees[key].get_title()}")
+            except KeyError:
+                print("No Employees Recorded")
+            except:
+                print("An Unknown Error has Occured!")
+        elif choice == '6':
+            print("Goodbye.")
+            break
+    break
+
+
+print(employees)
+db.close()
