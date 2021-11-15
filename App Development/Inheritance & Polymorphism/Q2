@@ -1,0 +1,33 @@
+import Lecturer as l
+import Student as s
+nric = 'a'
+staff_id= 'b'
+input_test_marks = -2
+input_exam_marks = -1
+name = input("Enter Lecturer name: ")
+while nric != staff_id:
+    nric = input("Enter Lecturer NRIC: ")
+    staff_id = input("Enter Staff ID: ")
+    if nric != staff_id:
+        print("Staff ID needs to be same as NRIC")
+hour = float(input("Enter Total Teaching Hours: "))
+lecturer = l.Lecturer(name, nric, staff_id)
+lecturer.set_total_TeachingHour(hour)
+
+input_name = input("Enter Student name: ")
+input_nric = input("Enter Student NRIC: ")
+input_admin_no = input("Enter Student Admin Number: ")
+
+while (input_test_marks<0 or input_exam_marks <0) or (input_test_marks>100 or input_exam_marks>100):
+    input_test_marks = float(input("Enter Test Marks: "))
+    input_exam_marks = float(input("Enter Exam Marks: "))
+    if input_test_marks < 0 or input_exam_marks < 0:
+        print("Exam and Test marks can't be below 0!")
+    if input_test_marks > 100 or input_exam_marks > 100:
+        print('Exam and Test marks can\'t be above 100')
+student = s.Student(input_name,input_nric,input_admin_no)
+student.set_test_mark(input_test_marks)
+student.set_exam_mark(input_exam_marks)
+
+print(lecturer)
+print(student)
